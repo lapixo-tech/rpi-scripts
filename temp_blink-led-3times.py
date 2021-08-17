@@ -9,7 +9,7 @@ GPIO.setup(18,GPIO.OUT)
 #obtener temperatura del procesador y devolverla en formato numérico
 def get_temp():
     temp = os.popen("vcgencmd measure_temp").readline()
-    return (temp.replace("temp=","").replace("'C",""))
+    return (temp.replace("temp=","").replace("'C","").strip())
 
 def blink():
     GPIO.output(18,GPIO.LOW)
@@ -31,12 +31,12 @@ def prender_led():
 if float(get_temp()) < 50:
     
     apagar_led()
-    print("Temperatura Menor a 50")
+    print("Temperatura Menor a 50 ("+ get_temp() +"C)")
 
 if float(get_temp()) > 50:
     
     blink()
-    print("Temperatura Mayor a 50")
+    print("Temperatura Mayor a 50 ("+ get_temp() +"C)")
 
     
     
